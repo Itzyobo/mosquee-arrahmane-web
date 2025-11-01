@@ -5,33 +5,25 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import donationImage from '@/assets/donation.jpg';
-
 const Donations = () => {
   const [customAmount, setCustomAmount] = useState('');
   const [selectedAmount, setSelectedAmount] = useState(50);
-
   const suggestedAmounts = [10, 25, 50, 100, 200];
-
   const handleDonate = (amount: number) => {
     // TODO: Integrate with PayPal
     console.log('Donation amount:', amount);
     alert(`Merci pour votre don de ${amount}€. L'intégration PayPal sera bientôt disponible.`);
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
 
       {/* Hero Section with Hadith */}
       <section className="pt-32 pb-20 relative overflow-hidden">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${donationImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
+        <div className="absolute inset-0 z-0" style={{
+        backgroundImage: `url(${donationImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
           <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-secondary/90 to-accent/95" />
         </div>
 
@@ -47,9 +39,7 @@ const Donations = () => {
               <div className="mb-4">
                 <div className="w-16 h-1 bg-accent mx-auto rounded-full mb-6" />
               </div>
-              <blockquote className="font-display text-2xl md:text-3xl font-semibold text-primary-foreground leading-relaxed mb-6">
-                « Une aumône n'a jamais diminué un bien, Allah n'ajoute que fierté à un serviteur qui pardonne et personne ne se montre humble pour Allah sans qu'Allah n'élève son rang. »
-              </blockquote>
+              <blockquote className="font-display text-2xl md:text-3xl font-semibold text-primary-foreground leading-relaxed mb-6">« Une aumône n'a jamais diminué un bien, Allah n'ajoute que fierté à un serviteur qui pardonne et personne ne se montre humble pour Allah sans qu'Allah n'élève son rang »</blockquote>
               <cite className="text-lg text-primary-foreground/80 not-italic">
                 [Authentique] - [Rapporté par Muslim] - [Sahih Muslim - 2588]
               </cite>
@@ -74,22 +64,12 @@ const Donations = () => {
 
               {/* Suggested Amounts */}
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-                {suggestedAmounts.map((amount) => (
-                  <button
-                    key={amount}
-                    onClick={() => {
-                      setSelectedAmount(amount);
-                      setCustomAmount('');
-                    }}
-                    className={`p-4 rounded-xl font-bold text-xl transition-all hover-lift ${
-                      selectedAmount === amount && !customAmount
-                        ? 'bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-lg'
-                        : 'bg-muted hover:bg-muted/80'
-                    }`}
-                  >
+                {suggestedAmounts.map(amount => <button key={amount} onClick={() => {
+                setSelectedAmount(amount);
+                setCustomAmount('');
+              }} className={`p-4 rounded-xl font-bold text-xl transition-all hover-lift ${selectedAmount === amount && !customAmount ? 'bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-lg' : 'bg-muted hover:bg-muted/80'}`}>
                     {amount}€
-                  </button>
-                ))}
+                  </button>)}
               </div>
 
               {/* Custom Amount */}
@@ -98,16 +78,10 @@ const Donations = () => {
                   Ou entrez un montant personnalisé
                 </label>
                 <div className="relative">
-                  <Input
-                    type="number"
-                    value={customAmount}
-                    onChange={(e) => {
-                      setCustomAmount(e.target.value);
-                      setSelectedAmount(0);
-                    }}
-                    placeholder="Montant personnalisé"
-                    className="text-xl py-6 pr-12"
-                  />
+                  <Input type="number" value={customAmount} onChange={e => {
+                  setCustomAmount(e.target.value);
+                  setSelectedAmount(0);
+                }} placeholder="Montant personnalisé" className="text-xl py-6 pr-12" />
                   <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xl font-bold text-muted-foreground">
                     €
                   </span>
@@ -115,11 +89,7 @@ const Donations = () => {
               </div>
 
               {/* Donate Button */}
-              <Button
-                size="lg"
-                onClick={() => handleDonate(customAmount ? parseFloat(customAmount) : selectedAmount)}
-                className="w-full text-lg py-6"
-              >
+              <Button size="lg" onClick={() => handleDonate(customAmount ? parseFloat(customAmount) : selectedAmount)} className="w-full text-lg py-6">
                 <Heart className="mr-2 w-5 h-5" />
                 Faire un don de {customAmount || selectedAmount}€
               </Button>
@@ -145,30 +115,25 @@ const Donations = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                icon: Building,
-                title: 'Rénovation de la Mosquée',
-                description: 'Amélioration des installations et de l\'accessibilité',
-                progress: 65,
-                goal: '50,000€',
-              },
-              {
-                icon: Users,
-                title: 'Programmes Éducatifs',
-                description: 'Cours d\'Islam et d\'Arabe pour tous les âges',
-                progress: 80,
-                goal: '15,000€',
-              },
-              {
-                icon: Heart,
-                title: 'Actions Caritatives',
-                description: 'Aide aux familles dans le besoin',
-                progress: 45,
-                goal: '20,000€',
-              },
-            ].map((project, index) => (
-              <div key={index} className="glass-effect p-6 rounded-xl hover-lift">
+            {[{
+            icon: Building,
+            title: 'Rénovation de la Mosquée',
+            description: 'Amélioration des installations et de l\'accessibilité',
+            progress: 65,
+            goal: '50,000€'
+          }, {
+            icon: Users,
+            title: 'Programmes Éducatifs',
+            description: 'Cours d\'Islam et d\'Arabe pour tous les âges',
+            progress: 80,
+            goal: '15,000€'
+          }, {
+            icon: Heart,
+            title: 'Actions Caritatives',
+            description: 'Aide aux familles dans le besoin',
+            progress: 45,
+            goal: '20,000€'
+          }].map((project, index) => <div key={index} className="glass-effect p-6 rounded-xl hover-lift">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4">
                   <project.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
@@ -184,17 +149,15 @@ const Donations = () => {
                     <span className="font-semibold text-primary">{project.progress}%</span>
                   </div>
                   <div className="h-2 bg-muted rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary to-secondary transition-all"
-                      style={{ width: `${project.progress}%` }}
-                    />
+                    <div className="h-full bg-gradient-to-r from-primary to-secondary transition-all" style={{
+                  width: `${project.progress}%`
+                }} />
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Objectif : <span className="font-semibold text-foreground">{project.goal}</span>
                 </p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -256,37 +219,28 @@ const Donations = () => {
               Questions Fréquentes
             </h2>
             <div className="space-y-4">
-              {[
-                {
-                  q: 'Puis-je obtenir un reçu fiscal ?',
-                  a: 'Oui, tous les dons donnent droit à un reçu fiscal. Contactez-nous pour en faire la demande.',
-                },
-                {
-                  q: 'Comment est utilisé mon don ?',
-                  a: 'Tous les dons sont utilisés pour l\'entretien de la mosquée, les programmes éducatifs et les actions caritatives.',
-                },
-                {
-                  q: 'Puis-je faire un don récurrent ?',
-                  a: 'Cette option sera bientôt disponible. Pour l\'instant, les dons sont ponctuels.',
-                },
-                {
-                  q: 'Le don est-il sécurisé ?',
-                  a: 'Oui, tous les paiements sont sécurisés via PayPal, une plateforme de paiement reconnue et fiable.',
-                },
-              ].map((faq, index) => (
-                <div key={index} className="glass-effect p-6 rounded-xl">
+              {[{
+              q: 'Puis-je obtenir un reçu fiscal ?',
+              a: 'Oui, tous les dons donnent droit à un reçu fiscal. Contactez-nous pour en faire la demande.'
+            }, {
+              q: 'Comment est utilisé mon don ?',
+              a: 'Tous les dons sont utilisés pour l\'entretien de la mosquée, les programmes éducatifs et les actions caritatives.'
+            }, {
+              q: 'Puis-je faire un don récurrent ?',
+              a: 'Cette option sera bientôt disponible. Pour l\'instant, les dons sont ponctuels.'
+            }, {
+              q: 'Le don est-il sécurisé ?',
+              a: 'Oui, tous les paiements sont sécurisés via PayPal, une plateforme de paiement reconnue et fiable.'
+            }].map((faq, index) => <div key={index} className="glass-effect p-6 rounded-xl">
                   <h3 className="font-bold text-foreground mb-2">{faq.q}</h3>
                   <p className="text-muted-foreground">{faq.a}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Donations;
