@@ -37,11 +37,11 @@ const About = () => {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="glass-effect p-4 rounded-lg text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">750</div>
+                  <div className="text-4xl font-bold text-primary mb-2">+3000</div>
                   <div className="text-sm text-muted-foreground">Capacité (places)</div>
                 </div>
                 <div className="glass-effect p-4 rounded-lg text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">400m²</div>
+                  <div className="text-4xl font-bold text-primary mb-2">2430m²</div>
                   <div className="text-sm text-muted-foreground">Surface totale</div>
                 </div>
               </div>
