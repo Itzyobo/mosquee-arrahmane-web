@@ -6,35 +6,34 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-
 const Contact = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    message: '',
+    message: ''
   });
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: 'Erreur',
         description: 'Veuillez remplir tous les champs obligatoires',
-        variant: 'destructive',
+        variant: 'destructive'
       });
       return;
     }
 
     // TODO: Implement actual form submission
     console.log('Form submitted:', formData);
-    
     toast({
       title: 'Message envoyé !',
-      description: 'Nous vous répondrons dans les plus brefs délais.',
+      description: 'Nous vous répondrons dans les plus brefs délais.'
     });
 
     // Reset form
@@ -42,12 +41,10 @@ const Contact = () => {
       name: '',
       email: '',
       phone: '',
-      message: '',
+      message: ''
     });
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
 
       {/* Hero Section */}
@@ -101,12 +98,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground mb-2">Téléphone</h3>
-                    <a
-                      href="tel:+33400000000"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      +33 4 XX XX XX XX
-                    </a>
+                    <a href="tel:+33400000000" className="text-muted-foreground hover:text-primary transition-colors">+33 4 72 02 02 88</a>
                   </div>
                 </div>
               </div>
@@ -118,10 +110,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground mb-2">Email</h3>
-                    <a
-                      href="mailto:contact@mosquee-arrahmane.fr"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
+                    <a href="mailto:contact@mosquee-arrahmane.fr" className="text-muted-foreground hover:text-primary transition-colors">
                       contact@mosquee-arrahmane.fr
                     </a>
                   </div>
@@ -147,31 +136,13 @@ const Contact = () => {
               <div className="glass-effect p-6 rounded-xl">
                 <h3 className="font-bold text-foreground mb-4">Suivez-nous</h3>
                 <div className="flex space-x-4">
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110"
-                    aria-label="Facebook"
-                  >
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="Facebook">
                     <Facebook className="w-6 h-6" />
                   </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110"
-                    aria-label="Instagram"
-                  >
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="Instagram">
                     <Instagram className="w-6 h-6" />
                   </a>
-                  <a
-                    href="https://youtube.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110"
-                    aria-label="YouTube"
-                  >
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="YouTube">
                     <Youtube className="w-6 h-6" />
                   </a>
                 </div>
@@ -189,55 +160,40 @@ const Contact = () => {
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                       Nom complet <span className="text-destructive">*</span>
                     </label>
-                    <Input
-                      id="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Votre nom"
-                      required
-                    />
+                    <Input id="name" type="text" value={formData.name} onChange={e => setFormData({
+                    ...formData,
+                    name: e.target.value
+                  })} placeholder="Votre nom" required />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                       Email <span className="text-destructive">*</span>
                     </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="votre@email.com"
-                      required
-                    />
+                    <Input id="email" type="email" value={formData.email} onChange={e => setFormData({
+                    ...formData,
+                    email: e.target.value
+                  })} placeholder="votre@email.com" required />
                   </div>
 
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
                       Téléphone
                     </label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+33 X XX XX XX XX"
-                    />
+                    <Input id="phone" type="tel" value={formData.phone} onChange={e => setFormData({
+                    ...formData,
+                    phone: e.target.value
+                  })} placeholder="+33 X XX XX XX XX" />
                   </div>
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                       Message <span className="text-destructive">*</span>
                     </label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Votre message..."
-                      rows={6}
-                      required
-                    />
+                    <Textarea id="message" value={formData.message} onChange={e => setFormData({
+                    ...formData,
+                    message: e.target.value
+                  })} placeholder="Votre message..." rows={6} required />
                   </div>
 
                   <Button type="submit" size="lg" className="w-full">
@@ -287,37 +243,28 @@ const Contact = () => {
               Questions Fréquentes
             </h2>
             <div className="space-y-4">
-              {[
-                {
-                  q: 'Quels sont les horaires d\'ouverture ?',
-                  a: 'La mosquée est ouverte pour les 5 prières quotidiennes. Le bureau administratif est ouvert du lundi au vendredi de 9h à 17h.',
-                },
-                {
-                  q: 'Comment puis-je m\'inscrire aux cours ?',
-                  a: 'Vous pouvez vous inscrire en nous contactant par téléphone ou email, ou en vous présentant directement à la mosquée.',
-                },
-                {
-                  q: 'Y a-t-il un parking disponible ?',
-                  a: 'Oui, un parking est disponible à proximité de la mosquée pour faciliter votre visite.',
-                },
-                {
-                  q: 'La mosquée est-elle accessible aux personnes à mobilité réduite ?',
-                  a: 'Oui, nous nous efforçons de rendre notre mosquée accessible à tous. Contactez-nous pour plus de détails.',
-                },
-              ].map((faq, index) => (
-                <div key={index} className="glass-effect p-6 rounded-xl">
+              {[{
+              q: 'Quels sont les horaires d\'ouverture ?',
+              a: 'La mosquée est ouverte pour les 5 prières quotidiennes. Le bureau administratif est ouvert du lundi au vendredi de 9h à 17h.'
+            }, {
+              q: 'Comment puis-je m\'inscrire aux cours ?',
+              a: 'Vous pouvez vous inscrire en nous contactant par téléphone ou email, ou en vous présentant directement à la mosquée.'
+            }, {
+              q: 'Y a-t-il un parking disponible ?',
+              a: 'Oui, un parking est disponible à proximité de la mosquée pour faciliter votre visite.'
+            }, {
+              q: 'La mosquée est-elle accessible aux personnes à mobilité réduite ?',
+              a: 'Oui, nous nous efforçons de rendre notre mosquée accessible à tous. Contactez-nous pour plus de détails.'
+            }].map((faq, index) => <div key={index} className="glass-effect p-6 rounded-xl">
                   <h3 className="font-bold text-foreground mb-2">{faq.q}</h3>
                   <p className="text-muted-foreground">{faq.a}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
