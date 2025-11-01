@@ -104,12 +104,10 @@ const Home = () => {
               <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
                 Bienvenue à la Mosquée Ar-Rahmane
               </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Située au cœur de Décines-Charpieu, la Mosquée Ar-Rahmane est un lieu de prière et de rassemblement pour la communauté musulmane. Avec une capacité de 750 places et une surface de 400 m², nous accueillons nos fidèles dans un cadre paisible et accueillant.
-              </p>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">Située au cœur de Décines-Charpieu, la Mosquée Ar-Rahmane est un lieu de prière et de rassemblement pour la communauté musulmane. Avec une capacité de plus de 3000 places et une surface de 2430 m², nous accueillons nos fidèles dans un cadre paisible et accueillant.</p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="glass-effect p-4 rounded-lg">
-                  <div className="text-3xl font-bold text-primary mb-1">750</div>
+                  <div className="text-3xl font-bold text-primary mb-1">3000</div>
                   <div className="text-sm text-muted-foreground">Places</div>
                 </div>
                 <div className="glass-effect p-4 rounded-lg">
