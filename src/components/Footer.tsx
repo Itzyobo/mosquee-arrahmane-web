@@ -93,9 +93,7 @@ const Footer = () => {
           <div className="text-center text-primary-foreground/60 text-sm">
             <p>&copy; {currentYear} Mosquée Ar-Rahmane. Tous droits réservés.</p>
             <p className="mt-2">
-              <a href="https://lecid.eu/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
-                lecid.eu
-              </a>
+              
             </p>
           </div>
         </div>
