@@ -2,10 +2,8 @@ import { MapPin, Users, Book, Heart } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import communityImage from '@/assets/community.jpg';
-
 const About = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
 
       {/* Hero Section */}
@@ -49,11 +47,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <img
-                src={communityImage}
-                alt="Communauté de la mosquée"
-                className="rounded-2xl shadow-strong hover-lift"
-              />
+              <img src={communityImage} alt="Communauté de la mosquée" className="rounded-2xl shadow-strong hover-lift" />
             </div>
           </div>
         </div>
@@ -72,29 +66,23 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                icon: Heart,
-                title: 'Fraternité',
-                description: 'Créer des liens forts entre les membres de la communauté musulmane',
-              },
-              {
-                icon: Book,
-                title: 'Apprentissage',
-                description: 'Transmettre les enseignements de l\'Islam avec sagesse et pédagogie',
-              },
-              {
-                icon: Users,
-                title: 'Inclusion',
-                description: 'Accueillir tous les fidèles dans un esprit d\'ouverture et de respect',
-              },
-              {
-                icon: MapPin,
-                title: 'Ancrage Local',
-                description: 'Être un pilier de la communauté musulmane de Décines-Charpieu',
-              },
-            ].map((value, index) => (
-              <div key={index} className="glass-effect p-6 rounded-xl hover-lift group">
+            {[{
+            icon: Heart,
+            title: 'Fraternité',
+            description: 'Créer des liens forts entre les membres de la communauté musulmane'
+          }, {
+            icon: Book,
+            title: 'Apprentissage',
+            description: 'Transmettre les enseignements de l\'Islam avec sagesse et pédagogie'
+          }, {
+            icon: Users,
+            title: 'Inclusion',
+            description: 'Accueillir tous les fidèles dans un esprit d\'ouverture et de respect'
+          }, {
+            icon: MapPin,
+            title: 'Ancrage Local',
+            description: 'Être un pilier de la communauté musulmane de Décines-Charpieu'
+          }].map((value, index) => <div key={index} className="glass-effect p-6 rounded-xl hover-lift group">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <value.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
@@ -104,8 +92,7 @@ const About = () => {
                 <p className="text-muted-foreground">
                   {value.description}
                 </p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -137,7 +124,7 @@ const About = () => {
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
-                    <span>Capacité totale de 750 places</span>
+                    <span>Capacité totale de plus de 3000 places</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
@@ -264,8 +251,6 @@ const About = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
