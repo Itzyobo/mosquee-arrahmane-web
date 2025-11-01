@@ -170,15 +170,15 @@ const About = () => {
                 <ul className="space-y-3 text-muted-foreground">
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
-                    <span>Salles dédiées aux cours d'Islam</span>
+                    <span>Salles dédiées aux cours d'arabe et d'éducation islamique</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
-                    <span>Salles pour les cours d'Arabe</span>
+                    <span>Bibliothèque, salle de réunion et espace de Co-Working</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
-                    <span>Bibliothèque islamique</span>
+                    <span>Bibliothèque, salle de réunion et espace de Co-Working</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />

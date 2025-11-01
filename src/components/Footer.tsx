@@ -59,9 +59,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <a href="mailto:contact@mosquee-arrahmane.fr" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">
-                  contact@mosquee-arrahmane.fr
-                </a>
+                <a href="mailto:contact@mosquee-arrahmane.fr" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">contact@lecid.net</a>
               </li>
             </ul>
           </div>
