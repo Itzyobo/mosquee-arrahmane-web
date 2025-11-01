@@ -7,24 +7,21 @@ import PrayerCard from '@/components/PrayerCard';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
 import heroImage from '@/assets/mosque-hero.jpg';
 import communityImage from '@/assets/community.jpg';
-
 const Home = () => {
-  const { prayerTimes, loading } = usePrayerTimes();
-
-  return (
-    <div className="min-h-screen">
+  const {
+    prayerTimes,
+    loading
+  } = usePrayerTimes();
+  return <div className="min-h-screen">
       <Navigation />
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
+        <div className="absolute inset-0 z-0" style={{
+        backgroundImage: `url(${heroImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
           <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90" />
         </div>
 
@@ -32,13 +29,19 @@ const Home = () => {
           <h1 className="font-display text-5xl md:text-7xl font-bold text-primary-foreground mb-6 animate-fade-in-up">
             Mosquée Ar-Rahmane
           </h1>
-          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-4 animate-fade-in-up" style={{
+          animationDelay: '0.2s'
+        }}>
             Un lieu de foi, d'apprentissage et de fraternité
           </p>
-          <p className="text-lg text-primary-foreground/80 mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <p className="text-lg text-primary-foreground/80 mb-8 animate-fade-in-up" style={{
+          animationDelay: '0.3s'
+        }}>
             9 Rue de Sully, 69150 Décines-Charpieu
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{
+          animationDelay: '0.4s'
+        }}>
             <Link to="/prieres">
               <Button size="lg" variant="default" className="text-lg px-8">
                 Voir les Horaires
@@ -72,32 +75,16 @@ const Home = () => {
             <p className="text-lg text-muted-foreground">
               {loading ? 'Chargement...' : prayerTimes?.gregorianDate}
             </p>
-            {prayerTimes && (
-              <p className="text-sm text-muted-foreground mt-2">
+            {prayerTimes && <p className="text-sm text-muted-foreground mt-2">
                 {prayerTimes.hijriDate}
-              </p>
-            )}
+              </p>}
           </div>
 
-          {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="h-48 rounded-xl bg-muted animate-pulse" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {prayerTimes?.prayers.map((prayer) => (
-                <PrayerCard
-                  key={prayer.name}
-                  name={prayer.name}
-                  adhan={prayer.adhan}
-                  iqama={prayer.iqama}
-                  isNext={prayer.name === prayerTimes.nextPrayer}
-                />
-              ))}
-            </div>
-          )}
+          {loading ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+              {[...Array(5)].map((_, i) => <div key={i} className="h-48 rounded-xl bg-muted animate-pulse" />)}
+            </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+              {prayerTimes?.prayers.map(prayer => <PrayerCard key={prayer.name} name={prayer.name} adhan={prayer.adhan} iqama={prayer.iqama} isNext={prayer.name === prayerTimes.nextPrayer} />)}
+            </div>}
 
           <div className="text-center mt-8">
             <Link to="/prieres">
@@ -126,7 +113,7 @@ const Home = () => {
                   <div className="text-sm text-muted-foreground">Places</div>
                 </div>
                 <div className="glass-effect p-4 rounded-lg">
-                  <div className="text-3xl font-bold text-primary mb-1">400m²</div>
+                  <div className="text-3xl font-bold text-primary mb-1">2430m²</div>
                   <div className="text-sm text-muted-foreground">Surface</div>
                 </div>
               </div>
@@ -138,11 +125,7 @@ const Home = () => {
               </Link>
             </div>
             <div className="relative animate-fade-in">
-              <img
-                src={communityImage}
-                alt="Communauté de la mosquée"
-                className="rounded-2xl shadow-strong hover-lift"
-              />
+              <img src={communityImage} alt="Communauté de la mosquée" className="rounded-2xl shadow-strong hover-lift" />
             </div>
           </div>
         </div>
@@ -161,32 +144,23 @@ const Home = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: BookOpen,
-                title: 'Cours d\'Islam',
-                description: 'Approfondissez votre connaissance de la religion',
-              },
-              {
-                icon: BookOpen,
-                title: 'Cours d\'Arabe',
-                description: 'Apprenez la langue du Coran',
-              },
-              {
-                icon: Users,
-                title: 'Prière du Vendredi',
-                description: 'Prêche en français tous les vendredis',
-              },
-              {
-                icon: Calendar,
-                title: 'Tarawih (Ramadan)',
-                description: 'Prières spéciales durant le mois sacré',
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="glass-effect p-6 rounded-xl hover-lift group"
-              >
+            {[{
+            icon: BookOpen,
+            title: 'Cours d\'Islam',
+            description: 'Approfondissez votre connaissance de la religion'
+          }, {
+            icon: BookOpen,
+            title: 'Cours d\'Arabe',
+            description: 'Apprenez la langue du Coran'
+          }, {
+            icon: Users,
+            title: 'Prière du Vendredi',
+            description: 'Prêche en français tous les vendredis'
+          }, {
+            icon: Calendar,
+            title: 'Tarawih (Ramadan)',
+            description: 'Prières spéciales durant le mois sacré'
+          }].map((service, index) => <div key={index} className="glass-effect p-6 rounded-xl hover-lift group">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <service.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
@@ -196,8 +170,7 @@ const Home = () => {
                 <p className="text-muted-foreground">
                   {service.description}
                 </p>
-              </div>
-            ))}
+              </div>)}
           </div>
 
           <div className="text-center mt-8">
@@ -232,8 +205,6 @@ const Home = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
