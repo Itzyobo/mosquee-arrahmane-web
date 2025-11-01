@@ -9,7 +9,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <Building2 className="w-6 h-6" />
-              <h3 className="font-display text-xl font-bold">Mosquée Ar-Rahmane</h3>
+              <h3 className="font-display text-xl font-bold">Mosquée Ar-Rahman</h3>
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Un lieu de prière, d'apprentissage et de fraternité au cœur de Décines-Charpieu.
