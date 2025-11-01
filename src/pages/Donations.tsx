@@ -40,9 +40,7 @@ const Donations = () => {
                 <div className="w-16 h-1 bg-accent mx-auto rounded-full mb-6" />
               </div>
               <blockquote className="font-display text-2xl md:text-3xl font-semibold text-primary-foreground leading-relaxed mb-6">« Une aumône n'a jamais diminué un bien, Allah n'ajoute que fierté à un serviteur qui pardonne et personne ne se montre humble pour Allah sans qu'Allah n'élève son rang »</blockquote>
-              <cite className="text-lg text-primary-foreground/80 not-italic">
-                [Authentique] - [Rapporté par Muslim] - [Sahih Muslim - 2588]
-              </cite>
+              <cite className="text-lg text-primary-foreground/80 not-italic">[Authentique]  - [Sahih Muslim - 2588]</cite>
               <div className="w-16 h-1 bg-accent mx-auto rounded-full mt-6" />
             </div>
 
