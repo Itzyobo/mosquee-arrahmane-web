@@ -188,29 +188,7 @@ const Activities = () => {
       </section>
 
       {/* Services NOT Available */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-display text-3xl font-bold text-foreground mb-8 text-center">
-              Services Non Disponibles
-            </h2>
-            <p className="text-center text-muted-foreground mb-8">
-              Pour votre information, les services suivants ne sont actuellement pas proposés par la mosquée :
-            </p>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="glass-effect p-6 rounded-xl text-center">
-                <p className="font-medium text-muted-foreground">Toilette mortuaire</p>
-              </div>
-              <div className="glass-effect p-6 rounded-xl text-center">
-                <p className="font-medium text-muted-foreground">Service Ikram</p>
-              </div>
-              <div className="glass-effect p-6 rounded-xl text-center">
-                <p className="font-medium text-muted-foreground">Repas du Ramadan</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA Section */}
       <section className="py-20 bg-muted/50">
