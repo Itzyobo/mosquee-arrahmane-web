@@ -29,9 +29,7 @@ const About = () => {
               <h2 className="font-display text-4xl font-bold text-foreground mb-6">
                 Notre Mission
               </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                La Mosquée Ar-Rahmane est bien plus qu'un simple lieu de prière. C'est un centre communautaire qui rassemble les fidèles autour des valeurs islamiques de paix, de fraternité et d'apprentissage.
-              </p>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">La Mosquée Ar-Rahman est bien plus qu'un simple lieu de prière. C'est un centre communautaire qui rassemble les fidèles autour des valeurs islamiques de paix, de fraternité et d'apprentissage.</p>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Nous nous engageons à offrir un espace accueillant pour tous, où chacun peut pratiquer sa foi, approfondir ses connaissances religieuses et tisser des liens fraternels avec la communauté.
               </p>
