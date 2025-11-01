@@ -172,7 +172,7 @@ const About = () => {
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
-                    <span>Bibliothèque, salle de réunion et espace de Co-Working</span>
+                    <span>14 salles de classe et salle de conférences</span>
                   </li>
                   <li className="flex items-start">
                     <div className="w-2 h-2 rounded-full bg-primary mt-2 mr-3 flex-shrink-0" />
