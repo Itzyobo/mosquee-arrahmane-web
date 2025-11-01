@@ -3,10 +3,8 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 const Activities = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navigation />
 
       {/* Hero Section */}
@@ -71,17 +69,13 @@ const Activities = () => {
                     <BookOpen className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <div>
-                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">
-                      Cours d'Islam
-                    </h3>
+                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">Conférences</h3>
                     <div className="inline-block px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">
                       Réguliers
                     </div>
                   </div>
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Approfondissez votre connaissance de l'Islam à travers des cours adaptés à tous les niveaux. Enseignement du Coran, Hadith, Fiqh et Sira.
-                </p>
+                <p className="text-muted-foreground mb-6 leading-relaxed">Conférences sur divers sujets culturels, éducatifs et spirituels animées par des imams et experts</p>
                 <div className="space-y-3">
                   <div className="flex items-center text-sm">
                     <Users className="w-4 h-4 text-primary mr-2" />
@@ -101,17 +95,13 @@ const Activities = () => {
                     <BookOpen className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <div>
-                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">
-                      Cours d'Arabe
-                    </h3>
+                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">Cours d'Arabe et d'éducation islamique</h3>
                     <div className="inline-block px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">
                       Hebdomadaires
                     </div>
                   </div>
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Apprenez la langue arabe pour mieux comprendre le Coran et approfondir votre pratique religieuse. Cours pour débutants et niveaux avancés.
-                </p>
+                <p className="text-muted-foreground mb-6 leading-relaxed">Apprenez la langue arabe et l'islam pour mieux comprendre le Coran et approfondir votre pratique religieuse. Cours pour débutants et niveaux avancés.</p>
                 <div className="space-y-3">
                   <div className="flex items-center text-sm">
                     <Users className="w-4 h-4 text-primary mr-2" />
@@ -249,8 +239,6 @@ const Activities = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Activities;
