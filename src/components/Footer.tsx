@@ -1,11 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Building2, MapPin, Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="bg-primary text-primary-foreground mt-20">
+  return <footer className="bg-primary text-primary-foreground mt-20">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
@@ -58,9 +55,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="w-4 h-4 flex-shrink-0" />
-                <a href="tel:+33400000000" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">
-                  +33 4 XX XX XX XX
-                </a>
+                <a href="tel:+33400000000" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">+33 4 72 02 02 88
++33 6 16 46 19 79</a>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 flex-shrink-0" />
@@ -75,31 +71,13 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-lg font-semibold mb-4">Suivez-nous</h4>
             <div className="flex space-x-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110"
-                aria-label="Facebook"
-              >
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="Facebook">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110"
-                aria-label="Instagram"
-              >
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="Instagram">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110"
-                aria-label="YouTube"
-              >
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="YouTube">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -125,8 +103,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
