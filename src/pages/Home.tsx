@@ -31,9 +31,7 @@ const Home = () => {
           </h1>
           <p className="text-xl md:text-2xl text-primary-foreground/90 mb-4 animate-fade-in-up" style={{
           animationDelay: '0.2s'
-        }}>
-            Un lieu de foi, d'apprentissage et de fraternité
-          </p>
+        }}>Unis dans la foi, Guidés par la connaissance</p>
           <p className="text-lg text-primary-foreground/80 mb-8 animate-fade-in-up" style={{
           animationDelay: '0.3s'
         }}>
@@ -107,7 +105,7 @@ const Home = () => {
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">Située au cœur de Décines-Charpieu, la Mosquée Ar-Rahmane est un lieu de prière et de rassemblement pour la communauté musulmane. Avec une capacité de plus de 3000 places et une surface de 2430 m², nous accueillons nos fidèles dans un cadre paisible et accueillant.</p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="glass-effect p-4 rounded-lg">
-                  <div className="text-3xl font-bold text-primary mb-1">3000</div>
+                  <div className="text-3xl font-bold text-primary mb-1">+3000</div>
                   <div className="text-sm text-muted-foreground">Places</div>
                 </div>
                 <div className="glass-effect p-4 rounded-lg">
