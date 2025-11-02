@@ -79,7 +79,7 @@ const Footer = () => {
               <a href="https://www.youtube.com/@cidecines3561" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="YouTube">
                 <Youtube className="w-5 h-5" />
               </a>
-              <a href="https://wa.me/33616461979" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="WhatsApp">
+              <a href="https://chat.whatsapp.com/JWqll01fCqBBmu2X769MtM" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="WhatsApp Groupe">
                 <MessageCircle className="w-5 h-5" />
               </a>
             </div>

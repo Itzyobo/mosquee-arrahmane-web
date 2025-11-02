@@ -37,13 +37,13 @@ export const usePrayerTimes = () => {
           return `${String(iqamaHours).padStart(2, '0')}:${String(iqamaMinutes).padStart(2, '0')}`;
         };
 
-        // Transform API data
+        // Transform API data - API uses French spelling: dohr, maghreb, icha
         const prayers: PrayerTime[] = [
           { name: 'Fajr', adhan: data.fajr, iqama: calculateIqama(data.fajr, 'Fajr') },
-          { name: 'Dhuhr', adhan: data.dhuhr, iqama: calculateIqama(data.dhuhr, 'Dhuhr') },
+          { name: 'Dhuhr', adhan: data.dohr, iqama: calculateIqama(data.dohr, 'Dhuhr') },
           { name: 'Asr', adhan: data.asr, iqama: calculateIqama(data.asr, 'Asr') },
-          { name: 'Maghrib', adhan: data.maghrib, iqama: calculateIqama(data.maghrib, 'Maghrib') },
-          { name: 'Isha', adhan: data.isha, iqama: calculateIqama(data.isha, 'Isha') },
+          { name: 'Maghrib', adhan: data.maghreb, iqama: calculateIqama(data.maghreb, 'Maghrib') },
+          { name: 'Isha', adhan: data.icha, iqama: calculateIqama(data.icha, 'Isha') },
         ];
 
         // Determine next prayer
