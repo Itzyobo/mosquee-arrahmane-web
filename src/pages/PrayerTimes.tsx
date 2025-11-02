@@ -4,9 +4,11 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import PrayerCard from '@/components/PrayerCard';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
+import { useMonthlyCalendar } from '@/hooks/useMonthlyCalendar';
 
 const PrayerTimes = () => {
   const { prayerTimes, loading } = usePrayerTimes();
+  const { calendar, loading: calendarLoading } = useMonthlyCalendar(12);
   const [timeUntilNext, setTimeUntilNext] = useState('');
 
   useEffect(() => {
@@ -116,16 +118,40 @@ const PrayerTimes = () => {
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto glass-effect p-8 rounded-2xl">
-            <div className="text-center text-muted-foreground py-12">
-              <CalendarIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
-              <p className="text-lg">
-                Le calendrier mensuel complet sera bientôt disponible
-              </p>
-              <p className="text-sm mt-2">
-                En attendant, veuillez consulter les horaires du jour ci-dessus
-              </p>
-            </div>
+          <div className="max-w-6xl mx-auto glass-effect p-8 rounded-2xl overflow-x-auto">
+            {calendarLoading ? (
+              <div className="text-center text-muted-foreground py-12">
+                <CalendarIcon className="w-16 h-16 mx-auto mb-4 opacity-50 animate-pulse" />
+                <p className="text-lg">Chargement du calendrier...</p>
+              </div>
+            ) : (
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="p-3 text-left font-display font-bold text-foreground">Jour</th>
+                    <th className="p-3 text-center font-display font-bold text-foreground">Fajr</th>
+                    <th className="p-3 text-center font-display font-bold text-foreground">Shourouk</th>
+                    <th className="p-3 text-center font-display font-bold text-foreground">Dhuhr</th>
+                    <th className="p-3 text-center font-display font-bold text-foreground">Asr</th>
+                    <th className="p-3 text-center font-display font-bold text-foreground">Maghrib</th>
+                    <th className="p-3 text-center font-display font-bold text-foreground">Isha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {calendar.map((day) => (
+                    <tr key={day.day} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                      <td className="p-3 font-semibold text-foreground">{day.day} Déc</td>
+                      <td className="p-3 text-center text-muted-foreground">{day.fajr}</td>
+                      <td className="p-3 text-center text-muted-foreground">{day.sunrise}</td>
+                      <td className="p-3 text-center text-muted-foreground">{day.dhuhr}</td>
+                      <td className="p-3 text-center text-muted-foreground">{day.asr}</td>
+                      <td className="p-3 text-center text-muted-foreground">{day.maghrib}</td>
+                      <td className="p-3 text-center text-muted-foreground">{day.isha}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </section>

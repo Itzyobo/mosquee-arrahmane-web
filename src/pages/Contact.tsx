@@ -123,8 +123,8 @@ const Contact = () => {
                   <div>
                     <h3 className="font-bold text-foreground mb-2">Horaires d'Ouverture</h3>
                     <p className="text-muted-foreground">
-                      Ouvert pour les 5 prières quotidiennes<br />
-                      Bureau : Lundi - Vendredi, 9h - 17h
+                      Lundi - Mardi : 9h - 12h / 14h - 16h30<br />
+                      Jeudi - Vendredi : 9h - 12h / 14h - 16h30
                     </p>
                   </div>
                 </div>
@@ -133,15 +133,18 @@ const Contact = () => {
               {/* Social Media */}
               <div className="glass-effect p-6 rounded-xl">
                 <h3 className="font-bold text-foreground mb-4">Suivez-nous</h3>
-                <div className="flex space-x-4">
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="Facebook">
+                <div className="flex flex-wrap gap-4">
+                  <a href="https://www.facebook.com/LeCid2" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="Facebook">
                     <Facebook className="w-6 h-6" />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="Instagram">
+                  <a href="https://www.instagram.com/mosquee_de_decines/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="Instagram">
                     <Instagram className="w-6 h-6" />
                   </a>
-                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="YouTube">
+                  <a href="https://www.youtube.com/@cidecines3561" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="YouTube">
                     <Youtube className="w-6 h-6" />
+                  </a>
+                  <a href="https://wa.me/33616461979" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all hover:scale-110" aria-label="WhatsApp">
+                    <Phone className="w-6 h-6" />
                   </a>
                 </div>
               </div>
@@ -219,15 +222,16 @@ const Contact = () => {
             </div>
 
             <div className="glass-effect p-4 rounded-2xl overflow-hidden">
-              <div className="w-full h-96 bg-muted rounded-xl flex items-center justify-center">
-                <div className="text-center text-muted-foreground">
-                  <MapPin className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">Carte Google Maps</p>
-                  <p className="text-sm mt-2">
-                    L'intégration de la carte sera bientôt disponible
-                  </p>
-                </div>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.7891234567!2d4.9567890156841!3d45.767890279107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea1234567890%3A0x1234567890abcdef!2s9%20Rue%20de%20Sully%2C%2069150%20D%C3%A9cines-Charpieu!5e0!3m2!1sfr!2sfr!4v1234567890123!5m2!1sfr!2sfr"
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-xl"
+              />
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { BookOpen, Users, Calendar, Clock, UserCheck } from 'lucide-react';
+import { BookOpen, Users, Calendar, Clock, UserCheck, MessageCircle, Heart, Trophy } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -62,11 +62,11 @@ const Activities = () => {
                 </div>
               </div>
 
-              {/* Cours d'Islam */}
+              {/* Conférences */}
               <div className="glass-effect p-8 rounded-xl hover-lift">
                 <div className="flex items-start mb-6">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-4 flex-shrink-0">
-                    <BookOpen className="w-8 h-8 text-primary-foreground" />
+                    <MessageCircle className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <div>
                     <h3 className="font-display text-2xl font-bold text-foreground mb-2">Conférences</h3>
@@ -82,8 +82,8 @@ const Activities = () => {
                     <span className="text-muted-foreground">Pour tous les âges</span>
                   </div>
                   <div className="flex items-center text-sm">
-                    <BookOpen className="w-4 h-4 text-primary mr-2" />
-                    <span className="text-muted-foreground">Différents niveaux disponibles</span>
+                    <MessageCircle className="w-4 h-4 text-primary mr-2" />
+                    <span className="text-muted-foreground">Différents thèmes abordés</span>
                   </div>
                 </div>
               </div>
@@ -143,6 +143,66 @@ const Activities = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Événements sportifs */}
+              <div className="glass-effect p-8 rounded-xl hover-lift">
+                <div className="flex items-start mb-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-4 flex-shrink-0">
+                    <Trophy className="w-8 h-8 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                      Événements sportifs
+                    </h3>
+                    <div className="inline-block px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">
+                      Ponctuels
+                    </div>
+                  </div>
+                </div>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Organisation d'activités sportives pour renforcer la cohésion et promouvoir un mode de vie sain au sein de la communauté
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm">
+                    <Users className="w-4 h-4 text-primary mr-2" />
+                    <span className="text-muted-foreground">Pour toute la communauté</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Trophy className="w-4 h-4 text-primary mr-2" />
+                    <span className="text-muted-foreground">Esprit d'équipe et fraternité</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Maraude et bénévolat */}
+              <div className="glass-effect p-8 rounded-xl hover-lift">
+                <div className="flex items-start mb-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mr-4 flex-shrink-0">
+                    <Heart className="w-8 h-8 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">
+                      Maraude et bénévolat
+                    </h3>
+                    <div className="inline-block px-3 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium">
+                      Réguliers
+                    </div>
+                  </div>
+                </div>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Actions de solidarité et d'aide aux plus démunis, avec la participation active de nos bénévoles pour servir la communauté
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm">
+                    <Heart className="w-4 h-4 text-primary mr-2" />
+                    <span className="text-muted-foreground">Entraide et solidarité</span>
+                  </div>
+                  <div className="flex items-center text-sm">
+                    <Users className="w-4 h-4 text-primary mr-2" />
+                    <span className="text-muted-foreground">Rejoignez nos équipes</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -187,8 +247,6 @@ const Activities = () => {
         </div>
       </section>
 
-      {/* Services NOT Available */}
-      
 
       {/* CTA Section */}
       <section className="py-20 bg-muted/50">

@@ -1,34 +1,10 @@
 import { Calendar, Clock } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import newsData from '@/data/news.json';
 
 const News = () => {
-  const newsArticles = [
-    {
-      id: 1,
-      title: 'Début du mois de Ramadan 1446',
-      date: '2025-03-01',
-      category: 'Annonce',
-      excerpt: 'Le mois béni de Ramadan débutera incha\'Allah le samedi 1er mars 2025. Les prières de Tarawih seront organisées tous les soirs.',
-      content: 'Plus de détails à venir...',
-    },
-    {
-      id: 2,
-      title: 'Nouveaux cours d\'arabe pour enfants',
-      date: '2025-02-15',
-      category: 'Éducation',
-      excerpt: 'La mosquée lance de nouveaux cours d\'arabe spécialement conçus pour les enfants de 6 à 12 ans.',
-      content: 'Inscriptions ouvertes...',
-    },
-    {
-      id: 3,
-      title: 'Collecte pour la rénovation de la mosquée',
-      date: '2025-02-01',
-      category: 'Projet',
-      excerpt: 'Lancement d\'une collecte de fonds pour la rénovation et l\'amélioration des installations de la mosquée.',
-      content: 'Détails du projet...',
-    },
-  ];
+  const newsArticles = newsData;
 
   return (
     <div className="min-h-screen">

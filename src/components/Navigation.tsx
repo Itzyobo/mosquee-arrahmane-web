@@ -29,6 +29,9 @@ const Navigation = () => {
     to: '/actualites',
     label: 'Actualités'
   }, {
+    to: '/partenaires',
+    label: 'Partenaires'
+  }, {
     to: '/contact',
     label: 'Contact'
   }];

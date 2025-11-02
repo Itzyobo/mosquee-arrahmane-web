@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Building2, MapPin, Phone, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
+import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, MessageCircle } from 'lucide-react';
+import logoCid from '@/assets/logo-cid.png';
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return <footer className="bg-primary text-primary-foreground mt-20">
@@ -8,8 +10,8 @@ const Footer = () => {
           {/* About */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Building2 className="w-6 h-6" />
-              <h3 className="font-display text-xl font-bold">Mosquée Ar-Rahman</h3>
+              <img src={logoCid} alt="Logo CID" className="w-8 h-8" />
+              <h3 className="font-display text-xl font-bold">Mosquée Ar-Rahmane</h3>
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Un lieu de prière, d'apprentissage et de fraternité au cœur de Décines-Charpieu.
@@ -59,7 +61,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                <a href="mailto:contact@mosquee-arrahmane.fr" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">contact@lecid.net</a>
+                <a href="mailto:contact@lecid.net" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">contact@lecid.net</a>
               </li>
             </ul>
           </div>
@@ -67,15 +69,18 @@ const Footer = () => {
           {/* Social Media */}
           <div>
             <h4 className="font-display text-lg font-semibold mb-4">Suivez-nous</h4>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="Facebook">
+            <div className="flex flex-wrap gap-3">
+              <a href="https://www.facebook.com/LeCid2" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="Facebook">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="Instagram">
+              <a href="https://www.instagram.com/mosquee_de_decines/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="Instagram">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="YouTube">
+              <a href="https://www.youtube.com/@cidecines3561" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="YouTube">
                 <Youtube className="w-5 h-5" />
+              </a>
+              <a href="https://wa.me/33616461979" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-all hover:scale-110" aria-label="WhatsApp">
+                <MessageCircle className="w-5 h-5" />
               </a>
             </div>
             <div className="mt-6">
