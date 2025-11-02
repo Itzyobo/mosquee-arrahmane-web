@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import logoCidHaut from '@/assets/logo-cid-haut.png';
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -41,7 +40,13 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <img src={logoCidHaut} alt="Logo CID" className="h-16 w-auto object-contain" />
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all">
+              <Building2 className="w-6 h-6 text-primary-foreground" />
+            </div>
+            <div className="hidden md:block">
+              <h1 className="text-xl font-display font-bold text-foreground">Mosquée Ar-Rahman</h1>
+              <p className="text-xs text-muted-foreground">Décines-Charpieu</p>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
