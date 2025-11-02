@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, MessageCircle } from 'lucide-react';
 import logoCid from '@/assets/logo-cid.png';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return <footer className="bg-primary text-primary-foreground mt-20">
@@ -11,7 +10,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <img src={logoCid} alt="Logo CID" className="w-8 h-8" />
-              <h3 className="font-display text-xl font-bold">Mosquée Ar-Rahmane</h3>
+              <h3 className="font-display text-xl font-bold">Mosquée Ar-Rahman</h3>
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Un lieu de prière, d'apprentissage et de fraternité au cœur de Décines-Charpieu.
