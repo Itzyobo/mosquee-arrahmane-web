@@ -31,6 +31,19 @@ const PrayerTimes = () => {
           const hoursLeft = Math.floor(diff / 60);
           const minutesLeft = diff % 60;
           setTimeUntilNext(`${hoursLeft}h ${minutesLeft}min`);
+        } else {
+          // After Isha, calculate time until Fajr tomorrow
+          const fajrPrayer = prayerTimes.prayers[0]; // Fajr is first prayer
+          const [fajrHours, fajrMinutes] = fajrPrayer.iqama.split(':').map(Number);
+          const fajrTime = fajrHours * 60 + fajrMinutes;
+          
+          // Time until midnight + time from midnight to Fajr
+          const minutesUntilMidnight = (24 * 60) - currentTime;
+          const totalMinutes = minutesUntilMidnight + fajrTime;
+          
+          const hoursLeft = Math.floor(totalMinutes / 60);
+          const minutesLeft = totalMinutes % 60;
+          setTimeUntilNext(`${hoursLeft}h ${minutesLeft}min`);
         }
       }
     }, 1000);
