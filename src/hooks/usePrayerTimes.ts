@@ -24,8 +24,20 @@ export const usePrayerTimes = () => {
       try {
         setLoading(true);
         
+        // Fetch prayer times
         const response = await fetch('https://mawaqit-api-i5z7.onrender.com/api/v1/rahmane-decines-charpieu/prayer-times');
         const data = await response.json();
+
+        // Fetch Hijri date
+        let hijriDate = '';
+        try {
+          const hijriResponse = await fetch('https://www.habibur.com/hijri/api01/date/');
+          const hijriText = await hijriResponse.text();
+          // Convert "12-Jumada Al-Awwal-1447" to "12 Jumada Al Awwal 1447"
+          hijriDate = hijriText.replace(/-/g, ' ');
+        } catch (hijriError) {
+          console.error('Hijri date fetch error:', hijriError);
+        }
         
         // Calculate Iqama times: +10 minutes except Maghrib (+7 minutes)
         const calculateIqama = (adhanTime: string, prayerName: string) => {
@@ -58,7 +70,7 @@ export const usePrayerTimes = () => {
         const prayerData: PrayerTimesData = {
           prayers,
           nextPrayer,
-          hijriDate: data.hijriDate || '',
+          hijriDate,
           gregorianDate: data.gregorianDate || new Date().toLocaleDateString('fr-FR', {
             weekday: 'long',
             year: 'numeric',
