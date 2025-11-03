@@ -138,17 +138,21 @@ const PrayerTimes = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {calendar.map((day) => (
-                    <tr key={day.day} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
-                      <td className="p-3 font-semibold text-foreground">{day.day} Déc</td>
-                      <td className="p-3 text-center text-muted-foreground">{day.fajr}</td>
-                      <td className="p-3 text-center text-muted-foreground">{day.sunrise}</td>
-                      <td className="p-3 text-center text-muted-foreground">{day.dhuhr}</td>
-                      <td className="p-3 text-center text-muted-foreground">{day.asr}</td>
-                      <td className="p-3 text-center text-muted-foreground">{day.maghrib}</td>
-                      <td className="p-3 text-center text-muted-foreground">{day.isha}</td>
-                    </tr>
-                  ))}
+                  {calendar.map((day) => {
+                    const date = new Date(2024, 11, day.day); // December 2024
+                    const formattedDate = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+                    return (
+                      <tr key={day.day} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                        <td className="p-3 font-semibold text-foreground">{formattedDate}</td>
+                        <td className="p-3 text-center text-muted-foreground">{day.fajr}</td>
+                        <td className="p-3 text-center text-muted-foreground">{day.sunrise}</td>
+                        <td className="p-3 text-center text-muted-foreground">{day.dhuhr}</td>
+                        <td className="p-3 text-center text-muted-foreground">{day.asr}</td>
+                        <td className="p-3 text-center text-muted-foreground">{day.maghrib}</td>
+                        <td className="p-3 text-center text-muted-foreground">{day.isha}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             )}

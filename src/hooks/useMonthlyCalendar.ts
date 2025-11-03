@@ -22,7 +22,18 @@ export const useMonthlyCalendar = (month: number) => {
         const response = await fetch(`https://mawaqit-api-i5z7.onrender.com/api/v1/rahmane-decines-charpieu/calendar/${month}`);
         const data = await response.json();
         
-        setCalendar(data);
+        // Map API response (dohr, maghreb, icha) to our interface (dhuhr, maghrib, isha)
+        const mappedCalendar: DayPrayerTimes[] = data.map((day: any, index: number) => ({
+          day: index + 1,
+          fajr: day.fajr,
+          sunrise: day.sunrise,
+          dhuhr: day.dohr,
+          asr: day.asr,
+          maghrib: day.maghreb,
+          isha: day.icha,
+        }));
+        
+        setCalendar(mappedCalendar);
         setError(null);
       } catch (err) {
         setError('Erreur lors du chargement du calendrier mensuel');
