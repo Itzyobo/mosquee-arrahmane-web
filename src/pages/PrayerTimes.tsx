@@ -13,19 +13,19 @@ const PrayerTimes = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Calculate time until next prayer
+      // Calculate time until next prayer (Adhan)
       const now = new Date();
       const currentTime = now.getHours() * 60 + now.getMinutes();
       
       if (prayerTimes?.prayers) {
         const nextPrayer = prayerTimes.prayers.find(prayer => {
-          const [hours, minutes] = prayer.iqama.split(':').map(Number);
+          const [hours, minutes] = prayer.adhan.split(':').map(Number);
           const prayerTime = hours * 60 + minutes;
           return prayerTime > currentTime;
         });
 
         if (nextPrayer) {
-          const [hours, minutes] = nextPrayer.iqama.split(':').map(Number);
+          const [hours, minutes] = nextPrayer.adhan.split(':').map(Number);
           const prayerTime = hours * 60 + minutes;
           const diff = prayerTime - currentTime;
           const hoursLeft = Math.floor(diff / 60);
@@ -34,7 +34,7 @@ const PrayerTimes = () => {
         } else {
           // After Isha, calculate time until Fajr tomorrow
           const fajrPrayer = prayerTimes.prayers[0]; // Fajr is first prayer
-          const [fajrHours, fajrMinutes] = fajrPrayer.iqama.split(':').map(Number);
+          const [fajrHours, fajrMinutes] = fajrPrayer.adhan.split(':').map(Number);
           const fajrTime = fajrHours * 60 + fajrMinutes;
           
           // Time until midnight + time from midnight to Fajr
