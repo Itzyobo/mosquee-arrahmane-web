@@ -27,9 +27,12 @@ export const usePrayerTimes = () => {
       let hijriDate = '';
       try {
         const hijriResponse = await fetch('https://hijri.habibur.com/api01/date/');
-        const hijriText = await hijriResponse.text();
-        // Convert "12-Jumada Al-Awwal-1447" to "12 Jumada Al Awwal 1447"
-        hijriDate = hijriText.replace(/-/g, ' ');
+        if (hijriResponse.ok) {
+          const hijriText = await hijriResponse.text();
+          // Convert "13-Jumada Al-Awwal-1447" to "13 Jumada Al Awwal 1447"
+          hijriDate = hijriText.trim().replace(/-/g, ' ');
+          console.log('Hijri date loaded:', hijriDate);
+        }
       } catch (hijriError) {
         console.error('Hijri date fetch error:', hijriError);
       }
@@ -82,6 +85,21 @@ export const usePrayerTimes = () => {
         setPrayerTimes(prayerData);
         setError(null);
       } catch (err) {
+        // If Mawaqit fails but we have Hijri date, still show it
+        if (hijriDate) {
+          const fallbackData: PrayerTimesData = {
+            prayers: [],
+            nextPrayer: '',
+            hijriDate,
+            gregorianDate: new Date().toLocaleDateString('fr-FR', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }),
+          };
+          setPrayerTimes(fallbackData);
+        }
         setError('Erreur lors du chargement des horaires de prières');
         console.error('Prayer times fetch error:', err);
       } finally {
