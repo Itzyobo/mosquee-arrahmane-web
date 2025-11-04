@@ -1,4 +1,5 @@
 import { Heart, Users, BookOpen, GraduationCap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
@@ -144,12 +145,12 @@ const Partners = () => {
                 Vous souhaitez collaborer avec la Mosquée Ar-Rahmane pour servir la communauté ? 
                 Contactez-nous pour explorer les possibilités de partenariat.
               </p>
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-block px-8 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-lg font-semibold hover:shadow-strong transition-all hover:scale-105"
               >
                 Nous Contacter
-              </a>
+              </Link>
             </div>
           </div>
         </div>

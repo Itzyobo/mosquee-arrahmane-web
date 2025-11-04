@@ -23,18 +23,24 @@ export const usePrayerTimes = () => {
     const fetchPrayerTimes = async () => {
       setLoading(true);
       
-      // Fetch Hijri date independently
+      // Fetch Hijri date independently - always try to get it
       let hijriDate = '';
       try {
-        const hijriResponse = await fetch('https://hijri.habibur.com/api01/date/');
-        if (hijriResponse.ok) {
-          const hijriText = await hijriResponse.text();
-          // Convert "13-Jumada Al-Awwal-1447" to "13 Jumada Al Awwal 1447"
-          hijriDate = hijriText.trim().replace(/-/g, ' ');
-          console.log('Hijri date loaded:', hijriDate);
-        }
+        const hijriResponse = await fetch('https://hijri.habibur.com/api01/date/', {
+          mode: 'cors',
+        });
+        const hijriText = await hijriResponse.text();
+        // Convert "13-Jumada Al-Awwal-1447" to "13 Jumada Al Awwal 1447"
+        hijriDate = hijriText.trim().replace(/-/g, ' ');
+        console.log('Hijri date loaded:', hijriDate);
       } catch (hijriError) {
         console.error('Hijri date fetch error:', hijriError);
+        // Use browser's built-in Islamic calendar as fallback
+        hijriDate = new Date().toLocaleDateString('ar-SA-u-ca-islamic', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        });
       }
 
       // Fetch prayer times
