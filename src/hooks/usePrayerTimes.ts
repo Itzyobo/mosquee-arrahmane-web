@@ -35,8 +35,8 @@ export const usePrayerTimes = () => {
         console.log('Hijri date loaded:', hijriDate);
       } catch (hijriError) {
         console.error('Hijri date fetch error:', hijriError);
-        // Use browser's built-in Islamic calendar as fallback
-        hijriDate = new Date().toLocaleDateString('ar-SA-u-ca-islamic', {
+        // Use browser's built-in Islamic calendar as fallback with French locale
+        hijriDate = new Date().toLocaleDateString('fr-FR-u-ca-islamic', {
           day: 'numeric',
           month: 'long',
           year: 'numeric',
