@@ -102,9 +102,9 @@ const PrayerTimes = () => {
                 <div key={i} className="h-56 rounded-xl bg-muted animate-pulse" />
               ))}
             </div>
-          ) : (
+          ) : prayerTimes?.prayers && prayerTimes.prayers.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {prayerTimes?.prayers.map((prayer) => (
+              {prayerTimes.prayers.map((prayer) => (
                 <PrayerCard
                   key={prayer.name}
                   name={prayer.name}
@@ -113,6 +113,10 @@ const PrayerTimes = () => {
                   isNext={prayer.name === prayerTimes.nextPrayer}
                 />
               ))}
+            </div>
+          ) : (
+            <div className="text-center text-muted-foreground py-12">
+              <p className="text-lg">Les horaires de prière ne sont pas disponibles pour le moment.</p>
             </div>
           )}
         </div>

@@ -33,17 +33,19 @@ export const usePrayerTimes = () => {
           },
         });
         const hijriText = await hijriResponse.text();
-        // Convert "13-Jumada Al-Awwal-1447" to "13 Jumada Al Awwal 1447"
-        hijriDate = hijriText.trim().replace(/-/g, ' ');
+        // Keep format: "14-Jumada Al-Awwal-1447"
+        hijriDate = hijriText.trim();
         console.log('Hijri date loaded:', hijriDate);
       } catch (hijriError) {
         console.error('Hijri date fetch error:', hijriError);
-        // Use browser's built-in Islamic calendar as fallback with French locale
-        hijriDate = new Date().toLocaleDateString('fr-FR-u-ca-islamic', {
+        // Use browser's built-in Islamic calendar as fallback
+        const browserDate = new Date().toLocaleDateString('fr-FR-u-ca-islamic', {
           day: 'numeric',
           month: 'long',
           year: 'numeric',
         });
+        // Convert "5 joumada al-oula 1447" to "5-Joumada Al-Oula-1447"
+        hijriDate = browserDate.split(' ').join('-');
       }
 
       // Fetch prayer times
