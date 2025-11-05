@@ -27,7 +27,10 @@ export const usePrayerTimes = () => {
       let hijriDate = '';
       try {
         const hijriResponse = await fetch('https://hijri.habibur.com/api01/date/', {
-          mode: 'cors',
+          method: 'GET',
+          headers: {
+            'Accept': 'text/plain',
+          },
         });
         const hijriText = await hijriResponse.text();
         // Convert "13-Jumada Al-Awwal-1447" to "13 Jumada Al Awwal 1447"
