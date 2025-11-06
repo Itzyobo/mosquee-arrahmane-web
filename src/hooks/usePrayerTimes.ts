@@ -23,6 +23,30 @@ export const usePrayerTimes = () => {
     const fetchPrayerTimes = async () => {
       setLoading(true);
       
+      // Function to convert English Islamic months to French phonetic
+      const translateHijriMonth = (date: string): string => {
+        const monthTranslations: { [key: string]: string } = {
+          'Muharram': 'Mouharram',
+          'Safar': 'Safar',
+          'Rabi Al-Awwal': 'Rabi Al-Awal',
+          'Rabi Al-Thani': 'Rabi At-Thani',
+          'Jumada Al-Awwal': 'Joumada Al-Oula',
+          'Jumada Al-Thani': 'Joumada Ath-Thaniya',
+          'Rajab': 'Rajab',
+          'Shaban': 'Chaaban',
+          'Ramadan': 'Ramadan',
+          'Shawwal': 'Chawwal',
+          'Dhul-Qadah': 'Dhoul-Qiada',
+          'Dhul-Hijjah': 'Dhoul-Hijja'
+        };
+        
+        let translatedDate = date;
+        Object.entries(monthTranslations).forEach(([eng, fr]) => {
+          translatedDate = translatedDate.replace(eng, fr);
+        });
+        return translatedDate;
+      };
+      
       // Fetch Hijri date independently - always try to get it
       let hijriDate = '';
       try {
@@ -33,8 +57,8 @@ export const usePrayerTimes = () => {
           },
         });
         const hijriText = await hijriResponse.text();
-        // Keep format: "14-Jumada Al-Awwal-1447"
-        hijriDate = hijriText.trim();
+        // Translate to French phonetic: "14-Jumada Al-Awwal-1447" -> "14-Joumada Al-Oula-1447"
+        hijriDate = translateHijriMonth(hijriText.trim());
         console.log('Hijri date loaded:', hijriDate);
       } catch (hijriError) {
         console.error('Hijri date fetch error:', hijriError);
@@ -45,7 +69,9 @@ export const usePrayerTimes = () => {
           year: 'numeric',
         });
         // Convert "5 joumada al-oula 1447" to "5-Joumada Al-Oula-1447"
-        hijriDate = browserDate.split(' ').join('-');
+        hijriDate = browserDate.split(' ').map((part, i) => 
+          i === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)
+        ).join('-');
       }
 
       // Fetch prayer times
