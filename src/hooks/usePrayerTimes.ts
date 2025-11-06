@@ -26,18 +26,18 @@ export const usePrayerTimes = () => {
       // Function to convert English Islamic months to French phonetic
       const translateHijriMonth = (date: string): string => {
         const monthTranslations: { [key: string]: string } = {
-          'Muharram': 'Mouharram',
+          'Muharram': 'Muhharram',
           'Safar': 'Safar',
-          'Rabi Al-Awwal': 'Rabi Al-Awal',
+          'Rabi Al-Awwal': 'Rabi Al-Awwal',
           'Rabi Al-Thani': 'Rabi At-Thani',
-          'Jumada Al-Awwal': 'Joumada Al-Oula',
-          'Jumada Al-Thani': 'Joumada Ath-Thaniya',
+          'Jumada Al-Awwal': 'Jumada Al-Awwal',
+          'Jumada Al-Thani': 'Jumada Al-Thani',
           'Rajab': 'Rajab',
-          'Shaban': 'Chaaban',
+          'Shaban': 'Shaban',
           'Ramadan': 'Ramadan',
-          'Shawwal': 'Chawwal',
-          'Dhul-Qadah': 'Dhoul-Qiada',
-          'Dhul-Hijjah': 'Dhoul-Hijja'
+          'Shawwal': 'Shawwal',
+          'Dhul-Qadah': 'Dhul-Qadah',
+          'Dhul-Hijjah': 'Dhul-Hijjah'
         };
         
         let translatedDate = date;
