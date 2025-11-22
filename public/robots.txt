@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://www.google.com/search?q=https://arrahman.fr/sitemap.xml
+Sitemap: https://arrahman.fr/sitemap.xml
