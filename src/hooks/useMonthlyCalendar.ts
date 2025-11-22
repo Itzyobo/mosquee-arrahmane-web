@@ -19,7 +19,7 @@ export const useMonthlyCalendar = (month: number) => {
     const fetchCalendar = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`https://mawaqit-api-i5z7.onrender.com/api/v1/rahmane-decines-charpieu/calendar/${month}`);
+        const response = await fetch(`https://mawaqit-api-tedl2a.fly.dev/api/v1/rahmane-decines-charpieu/calendar/${month}`);
         const data = await response.json();
         
         // Map API response (dohr, maghreb, icha) to our interface (dhuhr, maghrib, isha)
