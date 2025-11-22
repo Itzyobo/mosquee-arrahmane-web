@@ -76,7 +76,7 @@ export const usePrayerTimes = () => {
 
       // Fetch prayer times
       try {
-        const response = await fetch('https://mawaqit-api-i5z7.onrender.com/api/v1/rahmane-decines-charpieu/prayer-times');
+        const response = await fetch('https://mawaqit-api-tedl2a.fly.dev/api/v1/rahmane-decines-charpieu/prayer-times');
         const data = await response.json();
         
         // Calculate Iqama times: +10 minutes except Maghrib (+7 minutes)
