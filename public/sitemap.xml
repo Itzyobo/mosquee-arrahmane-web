@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Page d'accueil : Priorité maximale, change souvent (horaires, actus) -->
   <url>
     <loc>https://arrahman.fr/</loc>
-    <lastmod>2025-02-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-11-22</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  </urlset>
+
+  <!-- Page des prières : Très important, contenu dynamique -->
+  <url>
+    <loc>https://arrahman.fr/prieres</loc>
+    <lastmod>2025-11-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Page des activités : Important pour le SEO local (cours, événements) -->
+  <url>
+    <loc>https://arrahman.fr/activites</loc>
+    <lastmod>2025-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Page des dons : Important pour l'association -->
+  <url>
+    <loc>https://arrahman.fr/dons</loc>
+    <lastmod>2025-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Page À propos : Contenu statique -->
+  <url>
+    <loc>https://arrahman.fr/apropos</loc>
+    <lastmod>2025-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Page Contact (si elle existe, sinon vous pouvez retirer ce bloc) -->
+  <url>
+    <loc>https://arrahman.fr/contact</loc>
+    <lastmod>2025-11-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+</urlset>
