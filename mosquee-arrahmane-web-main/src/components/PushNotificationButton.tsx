@@ -45,8 +45,7 @@ export function PushNotificationButton() {
   const subscribe = async () => {
     setLoading(true);
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js');
-      await navigator.serviceWorker.ready;
+      const registration = await navigator.serviceWorker.ready;
 
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
