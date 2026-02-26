@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import News from "./pages/News";
 import Partners from "./pages/Partners";
 import NotFound from "./pages/NotFound";
+import { NotificationProvider } from "./components/NotificationProvider";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <NotificationProvider />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
