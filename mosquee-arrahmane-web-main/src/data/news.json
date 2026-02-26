@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Début du mois de Ramadan 1446",
+    "date": "2025-03-01",
+    "category": "Annonce",
+    "excerpt": "Le mois béni de Ramadan débutera incha'Allah le samedi 1er mars 2025. Les prières de Tarawih seront organisées tous les soirs.",
+    "content": "Le mois béni de Ramadan débutera incha'Allah le samedi 1er mars 2025. Les prières de Tarawih seront organisées tous les soirs après la prière d'Isha. Nous invitons tous les fidèles à participer à ces moments spirituels forts.",
+    "imageUrl": ""
+  },
+  {
+    "id": 2,
+    "title": "Nouveaux cours d'arabe pour enfants",
+    "date": "2025-02-15",
+    "category": "Éducation",
+    "excerpt": "La mosquée lance de nouveaux cours d'arabe spécialement conçus pour les enfants de 6 à 12 ans.",
+    "content": "La mosquée lance de nouveaux cours d'arabe spécialement conçus pour les enfants de 6 à 12 ans. Les inscriptions sont ouvertes. Pour plus d'informations, veuillez nous contacter.",
+    "imageUrl": ""
+  },
+  {
+    "id": 3,
+    "title": "Collecte pour la rénovation de la mosquée",
+    "date": "2025-02-01",
+    "category": "Projet",
+    "excerpt": "Lancement d'une collecte de fonds pour la rénovation et l'amélioration des installations de la mosquée.",
+    "content": "Nous lançons une collecte de fonds pour la rénovation et l'amélioration des installations de la mosquée. Votre générosité nous permettra d'offrir un meilleur espace de prière et d'apprentissage à notre communauté.",
+    "imageUrl": ""
+  }
+]
