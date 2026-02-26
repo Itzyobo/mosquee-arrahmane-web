@@ -88,6 +88,11 @@ export function PushNotificationButton() {
       return;
     }
 
+    if (permission === 'denied') {
+      toast.error("Vous avez bloqué les notifications. Veuillez les réactiver dans les paramètres de votre navigateur (cadenas dans la barre d'adresse).");
+      return;
+    }
+
     // Afficher la modale style Apple avant de demander la permission native
     setShowModal(true);
   };
