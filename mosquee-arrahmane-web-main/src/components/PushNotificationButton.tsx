@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Bell, BellRing, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { IOSNotificationModal } from './IOSNotificationModal';
 
 const VAPID_PUBLIC_KEY = 'BLWDe-PrK0Q9i1Wv5A6UUdx8QMHznEFkfMikuq9mtUowTVW_Nc3DNleHZdXFJibz3KCEIYGqJVTZKo7p-f99GAQ';
 
@@ -9,6 +10,7 @@ export function PushNotificationButton() {
   const [loading, setLoading] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'Notification' in window) {
@@ -86,7 +88,17 @@ export function PushNotificationButton() {
       return;
     }
 
+    // Afficher la modale style Apple avant de demander la permission native
+    setShowModal(true);
+  };
+
+  const handleAllow = async () => {
+    setShowModal(false);
     await subscribe();
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
   };
 
   if (typeof window === 'undefined' || !('Notification' in window)) {
@@ -94,6 +106,7 @@ export function PushNotificationButton() {
   }
 
   return (
+    <>
     <button
       onClick={handleClick}
       disabled={loading}
@@ -102,5 +115,11 @@ export function PushNotificationButton() {
     >
       {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : permission === 'granted' ? <BellRing className="h-6 w-6 text-green-600" /> : <Bell className="h-6 w-6" />}
     </button>
+    <IOSNotificationModal 
+      isOpen={showModal} 
+      onClose={handleClose} 
+      onAllow={handleAllow} 
+    />
+    </>
   );
 }
