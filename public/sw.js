@@ -1,16 +1,16 @@
 // ===== INSTALL & ACTIVATE =====
-self.addEventListener('install', function(event) {
+self.addEventListener('install', function (event) {
   self.skipWaiting();
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', function (event) {
   event.waitUntil(clients.claim());
 });
 
 // ===== PUSH NOTIFICATION (iOS + Android compatible) =====
-self.addEventListener('push', function(event) {
+self.addEventListener('push', function (event) {
   let data = {};
-  
+
   if (event.data) {
     try {
       data = event.data.json();
@@ -24,6 +24,9 @@ self.addEventListener('push', function(event) {
     body: data.body || 'Nouvelle notification',
     icon: '/pwa-192x192.png',
     badge: '/pwa-192x192.png',
+    vibrate: [200, 100, 200],
+    renotify: true,
+    tag: data.tag || 'default',
     data: {
       dateOfArrival: Date.now(),
       url: data.url || '/'
@@ -36,21 +39,28 @@ self.addEventListener('push', function(event) {
 });
 
 // ===== NOTIFICATION CLICK =====
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', function (event) {
   event.notification.close();
 
-  event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function(clientList) {
-      const url = event.notification.data && event.notification.data.url ? event.notification.data.url : '/';
+  var targetUrl = '/';
+  if (event.notification.data && event.notification.data.url) {
+    targetUrl = event.notification.data.url;
+  }
 
-      for (let i = 0; i < clientList.length; i++) {
-        const client = clientList[i];
-        if (client.url.includes(url) && 'focus' in client) {
-          return client.focus();
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
+      // Chercher un onglet/fenêtre déjà ouvert(e) sur notre app
+      for (var i = 0; i < clientList.length; i++) {
+        var client = clientList[i];
+        if ('focus' in client) {
+          return client.navigate(targetUrl).then(function (c) {
+            return c.focus();
+          });
         }
       }
+      // Aucun onglet ouvert → en ouvrir un nouveau
       if (clients.openWindow) {
-        return clients.openWindow(url);
+        return clients.openWindow(targetUrl);
       }
     })
   );

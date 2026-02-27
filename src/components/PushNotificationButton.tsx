@@ -85,6 +85,9 @@ export function PushNotificationButton() {
 
             setPermission('granted');
             toast.success('Notifications activées avec succès !');
+
+            // Signaler au NotificationProvider que la permission a changé
+            window.dispatchEvent(new Event('notification-permission-changed'));
         } catch (error) {
             console.error('Erreur lors de l\'inscription push:', error);
             toast.error("Impossible d'activer les notifications. Vérifiez que l'app est ajoutée à l'écran d'accueil sur iOS.");
