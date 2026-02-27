@@ -1,73 +1,72 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePrayerTimes } from './usePrayerTimes';
 
 const PRAYER_NOTIF_KEY = 'prayer_notified_';
-
-// Fenêtre de "rattrapage" en ms : si une prière est passée depuis moins de 5 min
-// et qu'on n'a pas encore notifié, on envoie la notification immédiatement.
-const CATCH_UP_WINDOW_MS = 5 * 60 * 1000;
+const CHECK_INTERVAL = 30 * 1000; // Vérifier toutes les 30 secondes
+const CATCH_UP_WINDOW_MS = 5 * 60 * 1000; // Rattrapage si passée depuis < 5 min
 
 /**
- * Hook qui envoie une notification pile à la seconde de l'adhan.
- * Gère aussi le retour au premier plan (visibilitychange) pour
- * reprogrammer les timers et rattraper les prières manquées.
+ * Hook qui vérifie toutes les 30s si une prière est due.
+ * Approche par polling : fiable sur iOS et PC, survit aux mises en veille.
+ * Vérifie la permission à chaque tick (pas besoin d'événement custom).
  */
-export const usePrayerNotifications = (permissionGranted: boolean) => {
+export const usePrayerNotifications = () => {
     const { prayerTimes } = usePrayerTimes();
-    const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+    const prayerTimesRef = useRef(prayerTimes);
 
-    const scheduleNotifications = useCallback(async () => {
-        // Nettoyer les anciens timers
-        timeoutsRef.current.forEach(clearTimeout);
-        timeoutsRef.current = [];
+    // Toujours garder la ref à jour
+    useEffect(() => {
+        prayerTimesRef.current = prayerTimes;
+    }, [prayerTimes]);
 
-        if (!permissionGranted) return;
+    useEffect(() => {
         if (typeof window === 'undefined' || !('serviceWorker' in navigator)) return;
-        if (!prayerTimes?.prayers || prayerTimes.prayers.length === 0) return;
 
-        // Attendre que le SW soit prêt (avec timeout de 5s pour éviter de bloquer)
-        let registration: ServiceWorkerRegistration;
-        try {
-            registration = await Promise.race([
-                navigator.serviceWorker.ready,
-                new Promise<never>((_, reject) =>
-                    setTimeout(() => reject(new Error('SW ready timeout')), 5000)
-                ),
-            ]);
-        } catch {
-            console.warn('[PrayerNotif] Service Worker non prêt, notifications désactivées');
-            return;
-        }
+        const checkPrayers = async () => {
+            // Vérifier la permission à chaque tick (pas en paramètre)
+            if (!('Notification' in window) || Notification.permission !== 'granted') return;
 
-        const now = new Date();
-        const today = now.toISOString().slice(0, 10);
+            const prayers = prayerTimesRef.current?.prayers;
+            if (!prayers || prayers.length === 0) return;
 
-        // Nettoyage des clés d'hier
-        const yesterday = new Date(now);
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = yesterday.toISOString().slice(0, 10);
-        prayerTimes.prayers.forEach((prayer) => {
-            localStorage.removeItem(`${PRAYER_NOTIF_KEY}${yesterdayStr}_${prayer.name}`);
-        });
+            const now = new Date();
+            const today = now.toISOString().slice(0, 10);
 
-        for (const prayer of prayerTimes.prayers) {
-            const [prayerHours, prayerMinutes] = prayer.adhan.split(':').map(Number);
+            // Nettoyage des clés d'hier
+            const yesterday = new Date(now);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterdayStr = yesterday.toISOString().slice(0, 10);
+            prayers.forEach((prayer) => {
+                localStorage.removeItem(`${PRAYER_NOTIF_KEY}${yesterdayStr}_${prayer.name}`);
+            });
 
-            const target = new Date(now);
-            target.setHours(prayerHours, prayerMinutes, 0, 0);
+            // Obtenir le SW
+            let registration: ServiceWorkerRegistration;
+            try {
+                registration = await Promise.race([
+                    navigator.serviceWorker.ready,
+                    new Promise<never>((_, reject) =>
+                        setTimeout(() => reject(new Error('SW timeout')), 3000)
+                    ),
+                ]);
+            } catch {
+                return;
+            }
 
-            const delayMs = target.getTime() - now.getTime();
-            const notifKey = `${PRAYER_NOTIF_KEY}${today}_${prayer.name}`;
+            for (const prayer of prayers) {
+                const [h, m] = prayer.adhan.split(':').map(Number);
+                const target = new Date(now);
+                target.setHours(h, m, 0, 0);
 
-            // Déjà notifié aujourd'hui → skip
-            if (localStorage.getItem(notifKey)) continue;
+                const diffMs = now.getTime() - target.getTime();
+                const notifKey = `${PRAYER_NOTIF_KEY}${today}_${prayer.name}`;
 
-            if (delayMs > 0) {
-                // Prière dans le futur → programmer le timer
-                const timeout = setTimeout(async () => {
-                    if (localStorage.getItem(notifKey)) return;
+                // Déjà notifié → skip
+                if (localStorage.getItem(notifKey)) continue;
+
+                // La prière est due : elle vient de passer (0 à 5 min) ou pile maintenant
+                if (diffMs >= 0 && diffMs <= CATCH_UP_WINDOW_MS) {
                     localStorage.setItem(notifKey, 'true');
-
                     try {
                         await registration.showNotification(`🕌 ${prayer.name} — Adhan`, {
                             body: `Il est ${prayer.adhan}. C'est l'heure de la prière ${prayer.name}. Iqama à ${prayer.iqama}.`,
@@ -76,48 +75,33 @@ export const usePrayerNotifications = (permissionGranted: boolean) => {
                             tag: `prayer-${prayer.name}-${today}`,
                             data: { url: '/prieres' },
                         });
+                        console.log(`[PrayerNotif] ✅ Notification ${prayer.name}`);
                     } catch (err) {
-                        console.error(`[PrayerNotif] Erreur envoi notification ${prayer.name}:`, err);
+                        console.error(`[PrayerNotif] ❌ Erreur ${prayer.name}:`, err);
+                        // Retirer la clé pour réessayer au prochain tick
+                        localStorage.removeItem(notifKey);
                     }
-                }, delayMs);
-
-                timeoutsRef.current.push(timeout);
-            } else if (Math.abs(delayMs) <= CATCH_UP_WINDOW_MS) {
-                // Prière passée depuis < 5 min (retour au premier plan) → notifier immédiatement
-                localStorage.setItem(notifKey, 'true');
-
-                try {
-                    await registration.showNotification(`🕌 ${prayer.name} — Adhan`, {
-                        body: `Il est ${prayer.adhan}. C'est l'heure de la prière ${prayer.name}. Iqama à ${prayer.iqama}.`,
-                        icon: '/pwa-192x192.png',
-                        badge: '/pwa-192x192.png',
-                        tag: `prayer-${prayer.name}-${today}`,
-                        data: { url: '/prieres' },
-                    });
-                } catch (err) {
-                    console.error(`[PrayerNotif] Erreur envoi notification rattrapage ${prayer.name}:`, err);
                 }
-            }
-            // sinon : prière passée depuis > 5 min → on ne notifie pas
-        }
-    }, [prayerTimes, permissionGranted]);
-
-    useEffect(() => {
-        scheduleNotifications();
-
-        // Quand l'app revient au premier plan, reprogrammer les timers
-        const handleVisibility = () => {
-            if (document.visibilityState === 'visible') {
-                scheduleNotifications();
             }
         };
 
+        // Vérifier immédiatement au montage
+        checkPrayers();
+
+        // Puis toutes les 30s
+        const interval = setInterval(checkPrayers, CHECK_INTERVAL);
+
+        // Au retour au premier plan, vérifier immédiatement
+        const handleVisibility = () => {
+            if (document.visibilityState === 'visible') {
+                checkPrayers();
+            }
+        };
         document.addEventListener('visibilitychange', handleVisibility);
 
         return () => {
-            timeoutsRef.current.forEach(clearTimeout);
-            timeoutsRef.current = [];
+            clearInterval(interval);
             document.removeEventListener('visibilitychange', handleVisibility);
         };
-    }, [scheduleNotifications]);
+    }, []); // Aucune dépendance → un seul intervalle stable
 };
