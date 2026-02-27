@@ -74,10 +74,8 @@ export const usePrayerNotifications = (permissionGranted: boolean) => {
                             icon: '/pwa-192x192.png',
                             badge: '/pwa-192x192.png',
                             tag: `prayer-${prayer.name}-${today}`,
-                            renotify: true,
-                            vibrate: [200, 100, 200],
                             data: { url: '/prieres' },
-                        } as any);
+                        });
                     } catch (err) {
                         console.error(`[PrayerNotif] Erreur envoi notification ${prayer.name}:`, err);
                     }
@@ -94,10 +92,8 @@ export const usePrayerNotifications = (permissionGranted: boolean) => {
                         icon: '/pwa-192x192.png',
                         badge: '/pwa-192x192.png',
                         tag: `prayer-${prayer.name}-${today}`,
-                        renotify: true,
-                        vibrate: [200, 100, 200],
                         data: { url: '/prieres' },
-                    } as any);
+                    });
                 } catch (err) {
                     console.error(`[PrayerNotif] Erreur envoi notification rattrapage ${prayer.name}:`, err);
                 }

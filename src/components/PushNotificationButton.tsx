@@ -45,7 +45,7 @@ export function PushNotificationButton() {
     const subscribe = async () => {
         setLoading(true);
         try {
-            // ÉTAPE 1 : Demander la permission de notification (OBLIGATOIRE sur iOS 16.4+)
+            // ÉTAPE 1 : Demander la permission de notification
             const result = await Notification.requestPermission();
 
             if (result === 'denied') {
@@ -60,36 +60,34 @@ export function PushNotificationButton() {
                 return;
             }
 
-            // ÉTAPE 2 : Attendre que le service worker soit prêt
-            const registration = await navigator.serviceWorker.ready;
+            // ✅ Permission accordée → activer IMMÉDIATEMENT les notifications locales
+            // (prières + annonces) AVANT de tenter l'abonnement push
+            setPermission('granted');
+            window.dispatchEvent(new Event('notification-permission-changed'));
+            console.log('[PushButton] Permission accordée, notifications locales activées');
 
-            // ÉTAPE 3 : Vérifier s'il y a déjà un abonnement push
-            let subscription = await registration.pushManager.getSubscription();
+            // ÉTAPE 2 : Tenter l'abonnement push (optionnel, ne bloque pas les notifs locales)
+            try {
+                const registration = await navigator.serviceWorker.ready;
+                let subscription = await registration.pushManager.getSubscription();
 
-            if (!subscription) {
-                // ÉTAPE 4 : S'abonner aux notifications push avec VAPID
-                subscription = await registration.pushManager.subscribe({
-                    userVisibleOnly: true,
-                    applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
-                });
+                if (!subscription) {
+                    subscription = await registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+                    });
+                }
+
+                console.log('[PushButton] Push subscription réussie:', JSON.stringify(subscription));
+            } catch (pushError) {
+                // L'abonnement push a échoué (normal sur iOS sans backend push)
+                // Les notifications LOCALES fonctionnent quand même
+                console.warn('[PushButton] Abonnement push échoué (normal sans backend):', pushError);
             }
 
-            console.log('Push subscription:', JSON.stringify(subscription));
-
-            // TODO: Envoyez l'objet subscription à votre backend
-            // await fetch('/api/notifications/subscribe', {
-            //   method: 'POST',
-            //   body: JSON.stringify(subscription),
-            //   headers: { 'Content-Type': 'application/json' },
-            // });
-
-            setPermission('granted');
             toast.success('Notifications activées avec succès !');
-
-            // Signaler au NotificationProvider que la permission a changé
-            window.dispatchEvent(new Event('notification-permission-changed'));
         } catch (error) {
-            console.error('Erreur lors de l\'inscription push:', error);
+            console.error('[PushButton] Erreur:', error);
             toast.error("Impossible d'activer les notifications. Vérifiez que l'app est ajoutée à l'écran d'accueil sur iOS.");
         } finally {
             setLoading(false);

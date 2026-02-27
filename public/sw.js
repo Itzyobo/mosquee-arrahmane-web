@@ -19,13 +19,11 @@ self.addEventListener('push', function (event) {
     }
   }
 
-  const title = data.title || 'Mosquée Ar-Rahmane';
-  const options = {
+  var title = data.title || 'Mosquée Ar-Rahmane';
+  var options = {
     body: data.body || 'Nouvelle notification',
     icon: '/pwa-192x192.png',
     badge: '/pwa-192x192.png',
-    vibrate: [200, 100, 200],
-    renotify: true,
     tag: data.tag || 'default',
     data: {
       dateOfArrival: Date.now(),

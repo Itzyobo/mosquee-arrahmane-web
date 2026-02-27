@@ -97,10 +97,8 @@ export const useAnnouncementNotifications = (permissionGranted: boolean) => {
                         icon: '/pwa-192x192.png',
                         badge: '/pwa-192x192.png',
                         tag: `announcement-${article.id}`,
-                        renotify: true,
-                        vibrate: [200, 100, 200],
                         data: { url: '/actualites' },
-                    } as any);
+                    });
                     console.log(`[AnnouncementNotif] ✅ Notification envoyée pour annonce ${article.id}`);
                 } catch (err) {
                     console.error(`[AnnouncementNotif] ❌ Erreur notification annonce ${article.id}:`, err);
