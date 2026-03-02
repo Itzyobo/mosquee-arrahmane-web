@@ -20,8 +20,8 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Ajout du bloc SEO ici */}
       <Helmet>
-        <title>Mosquée Ar-Rahmane - Décines-Charpieu | Horaires et Activités</title>
-        <meta name="description" content="Bienvenue à la Mosquée Ar-Rahmane de Décines (69150). Retrouvez les horaires de prière, les activités culturelles, l'école d'arabe et l'actualité de l'association." />
+        <title>Mosquée Arrahman - Décines-Charpieu | Horaires et Activités</title>
+        <meta name="description" content="Bienvenue à la Mosquée Arrahman de Décines (69150). Retrouvez les horaires de prière, les activités culturelles, l'école d'arabe et l'actualité de l'association." />
         <link rel="canonical" href="https://arrahman.fr/" />
       </Helmet>
 

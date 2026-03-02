@@ -27,7 +27,7 @@ export function IOSNotificationModal({ isOpen, onClose, onAllow }: IOSNotificati
             <div className={`w-[270px] bg-white/90 backdrop-blur-xl rounded-[14px] shadow-lg overflow-hidden text-center transform transition-all duration-300 ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}>
                 <div className="pt-5 pb-4 px-4">
                     <h3 className="text-[17px] font-semibold leading-6 text-black mb-1">
-                        "Mosquée Ar-Rahmane" souhaite vous envoyer des notifications
+                        "Mosquée Arrahman" souhaite vous envoyer des notifications
                     </h3>
                     <p className="text-[13px] leading-4 text-black/80">
                         Les notifications peuvent inclure des alertes, des sons et des badges d'icônes.

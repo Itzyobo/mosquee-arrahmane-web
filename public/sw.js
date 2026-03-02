@@ -19,7 +19,7 @@ self.addEventListener('push', function (event) {
     }
   }
 
-  var title = data.title || 'Mosquée Ar-Rahmane';
+  var title = data.title || 'Mosquée Arrahman';
   var options = {
     body: data.body || 'Nouvelle notification',
     icon: '/pwa-192x192.png',
