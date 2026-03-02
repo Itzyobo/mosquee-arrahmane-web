@@ -9,7 +9,7 @@ self.addEventListener('activate', function (event) {
 
 // ===== PUSH NOTIFICATION (iOS + Android compatible) =====
 self.addEventListener('push', function (event) {
-  let data = {};
+  var data = {};
 
   if (event.data) {
     try {
@@ -24,7 +24,9 @@ self.addEventListener('push', function (event) {
     body: data.body || 'Nouvelle notification',
     icon: '/pwa-192x192.png',
     badge: '/pwa-192x192.png',
-    tag: data.tag || 'default',
+    tag: data.tag || 'default-' + Date.now(),
+    renotify: true,
+    requireInteraction: false,
     data: {
       dateOfArrival: Date.now(),
       url: data.url || '/'
@@ -61,5 +63,20 @@ self.addEventListener('notificationclick', function (event) {
         return clients.openWindow(targetUrl);
       }
     })
+  );
+});
+
+// ===== PUSH SUBSCRIPTION CHANGE (renouvellement iOS) =====
+self.addEventListener('pushsubscriptionchange', function (event) {
+  event.waitUntil(
+    self.registration.pushManager.subscribe(event.oldSubscription.options)
+      .then(function (subscription) {
+        // Renvoyer la nouvelle subscription au backend
+        return fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subscription: subscription.toJSON() })
+        });
+      })
   );
 });

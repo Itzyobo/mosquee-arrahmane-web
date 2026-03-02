@@ -3,7 +3,7 @@ import { Bell, BellRing, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { IOSNotificationModal } from './IOSNotificationModal';
 
-const VAPID_PUBLIC_KEY = 'BLWDe-PrK0Q9i1Wv5A6UUdx8QMHznEFkfMikuq9mtUowTVW_Nc3DNleHZdXFJibz3KCEIYGqJVTZKo7p-f99GAQ';
+const VAPID_PUBLIC_KEY = 'BNCUxuoei9S2yOsU8dZh71jjRpUO12A_nxo7L2_VIrOqx86TTxiiIcHeIiJ1Gl83FBWvSuvr25rVz4HyUU59Mow';
 
 export function PushNotificationButton() {
     const [permission, setPermission] = useState<NotificationPermission>('default');
@@ -25,6 +25,11 @@ export function PushNotificationButton() {
             window.matchMedia('(display-mode: standalone)').matches ||
             (window.navigator as any).standalone === true;
         setIsStandalone(isStandaloneMode);
+
+        // Si déjà autorisé, s'assurer que la subscription est envoyée au backend
+        if ('Notification' in window && Notification.permission === 'granted' && 'serviceWorker' in navigator) {
+            ensureBackendSubscription();
+        }
     }, []);
 
     const urlBase64ToUint8Array = (base64String: string) => {
@@ -40,6 +45,45 @@ export function PushNotificationButton() {
             outputArray[i] = rawData.charCodeAt(i);
         }
         return outputArray;
+    };
+
+    // Envoyer la subscription au backend pour les notifications serveur
+    const sendSubscriptionToBackend = async (subscription: PushSubscription) => {
+        try {
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    subscription: subscription.toJSON(),
+                }),
+            });
+            const data = await res.json();
+            console.log('[PushButton] Backend subscription:', data);
+        } catch (err) {
+            console.warn('[PushButton] Erreur envoi subscription au backend:', err);
+        }
+    };
+
+    // S'assurer que la subscription existe côté backend (pour les utilisateurs déjà abonnés)
+    const ensureBackendSubscription = async () => {
+        try {
+            const registration = await navigator.serviceWorker.ready;
+            let subscription = await registration.pushManager.getSubscription();
+
+            if (subscription) {
+                // Réenvoyer au backend (idempotent — le backend ignore les doublons)
+                await sendSubscriptionToBackend(subscription);
+            } else {
+                // Pas de subscription existante → en créer une nouvelle
+                subscription = await registration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+                });
+                await sendSubscriptionToBackend(subscription);
+            }
+        } catch (err) {
+            console.warn('[PushButton] Erreur ensureBackendSubscription:', err);
+        }
     };
 
     const subscribe = async () => {
@@ -60,13 +104,12 @@ export function PushNotificationButton() {
                 return;
             }
 
-            // ✅ Permission accordée → activer IMMÉDIATEMENT les notifications locales
-            // (prières + annonces) AVANT de tenter l'abonnement push
+            // ✅ Permission accordée
             setPermission('granted');
             window.dispatchEvent(new Event('notification-permission-changed'));
-            console.log('[PushButton] Permission accordée, notifications locales activées');
+            console.log('[PushButton] Permission accordée');
 
-            // ÉTAPE 2 : Tenter l'abonnement push (optionnel, ne bloque pas les notifs locales)
+            // ÉTAPE 2 : Créer la subscription push et l'envoyer au backend
             try {
                 const registration = await navigator.serviceWorker.ready;
                 let subscription = await registration.pushManager.getSubscription();
@@ -78,14 +121,15 @@ export function PushNotificationButton() {
                     });
                 }
 
-                console.log('[PushButton] Push subscription réussie:', JSON.stringify(subscription));
+                console.log('[PushButton] Push subscription créée');
+
+                // Envoyer au backend pour les notifications serveur
+                await sendSubscriptionToBackend(subscription);
             } catch (pushError) {
-                // L'abonnement push a échoué (normal sur iOS sans backend push)
-                // Les notifications LOCALES fonctionnent quand même
-                console.warn('[PushButton] Abonnement push échoué (normal sans backend):', pushError);
+                console.warn('[PushButton] Abonnement push échoué:', pushError);
             }
 
-            toast.success('Notifications activées avec succès !');
+            toast.success('Notifications activées avec succès ! Vous recevrez les notifications même quand l\'app est fermée.');
         } catch (error) {
             console.error('[PushButton] Erreur:', error);
             toast.error("Impossible d'activer les notifications. Vérifiez que l'app est ajoutée à l'écran d'accueil sur iOS.");
@@ -150,3 +194,5 @@ export function PushNotificationButton() {
         </>
     );
 }
+
+
